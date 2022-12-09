@@ -11,7 +11,7 @@ aliases = Map.fromList [("3oo5x9t1i7i15i19i21", "pepito")]
 
 addAliases k alias scales = Map.insert alias (fromMaybe [2.005319830023106,2.941349974038373,4.674028886060471] (Map.lookup k scales)) scales
 
-piraScales' = Map.foldrWithKey addAliases (Map.fromList piraScales) aliases
+piraScales' = Map.toList $ Map.foldrWithKey addAliases (Map.fromList piraScales) aliases
 
-piraScale = getScale (Map.toList piraScales') 
+piraScale = getScale piraScales' 
 
