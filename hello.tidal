@@ -1,0 +1,24 @@
+let scale = getScale (scaleTable ++ [("techno", [0,2,3,5,7,8,10]),
+                                     ("broken", [0,1,4,7,8,10])
+                                    ])
+
+d1 $ n (scale "techno" "0 -1 -2 -3") # sound "arpy"
+
+
+let scale = getScale (scaleTable ++ [("b", [7.292190926654878]),
+                                    ("coso", [4.980,6.7131,7.6491,10.8055])])
+
+d1
+  $  (jux (degradeBy 0.5 . (# speed "<0.5 0.2 2 3 2 5>")))
+  $ every 4 (jux ((fast 2) . (|+| note "2 5 <10 7 -8>") . (# gain "{0.5 ~ 0.7 1}") . brak))
+  $ jux(ghost . palindrome)
+  $ note (scale "<b coso b b>" "{0 <6 7> 8 <-1 -2 -3 -5> 1 0}%8")
+  # s "<jvbass bd, can(3, 7) arpy(2, 5)>"
+
+hush
+
+d1 $ n (piraScale "pepito" "0 1 2")
+  # s "superpiano"
+
+
+piraScaleList
