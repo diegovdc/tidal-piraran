@@ -43,7 +43,7 @@ var val= ~range.(100,200);
 
 ~waveShapeList= ["AKWF"]++~waveList;
 
-~postOscs= ~waveShapeList.collect({|item|  item.postln });
+~postOscs= ~waveShapeList.collect({|item|  item.postln; \n });
 
 (
 ~osciladores = Dictionary.new;
@@ -76,7 +76,7 @@ SynthDef(\wpad, {
 }).add;
 
 // first test, change the waveshape with the param wave!
-/*(instrument: \waveShape, wave: 4500).play;*/
+/*(instrument: \waveShape, wave: 500).play;*/
 
 // all waveshapes with a LPF and a simple 4 point envelope
 SynthDef(\wlpfpad, {
