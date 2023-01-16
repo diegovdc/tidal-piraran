@@ -1,3 +1,4 @@
+-- Copy this file to Boot.hs and modify according to your needs
 :set -XOverloadedStrings
 :set prompt ""
 
@@ -75,9 +76,11 @@ let getState = streamGet tidal
     setB = streamSetB tidal
 :}
 
-:set prompt "tidal> "
+:set prompt ">"
 :set prompt-cont ""
 
-:script tunings/main.hs
+:script /path/to/this/Repo/piraran/tidal-piraran/tunings/diatonic-cps.hs
+:script /path/to/this/Repo/piraran/tidal-piraran/tunings/main.hs
+:script /path/to/this/Repo/piraran/tidal-piraran/PiraranSuperCollider/funcas.tidal
 
 default (Pattern String, Integer, Double)
