@@ -40,26 +40,28 @@ Plot the first wavetable of the range above like this:
 
 Test the Synths in SuperCollider:
 
-`(instrument: \wpad, wave: 1500).play`
+```scd
+(instrument: \wpad, wave: 1500).play
 
-`(instrument: \wlpfpad, wave: 1500).play`
+(instrument: \wlpfpad, wave: 1500).play
 
-`(instrument: \whpfpad, wave: 1500).play`
+(instrument: \whpfpad, wave: 1500).play
 
-`(instrument: \wchpad).play`
+(instrument: \wchpad).play
 
-`(instrument: \wvpad).play`
+(instrument: \wvpad).play
 
-`(instrument: \wv3pad).play`
+(instrument: \wv3pad).play
 
-`(instrument: \wperc, wave: 1500).play`
+(instrument: \wperc, wave: 1500).play
 
-`(instrument: \wlpfperc, wave: 1500).play`
+(instrument: \wlpfperc, wave: 1500).play
 
-`(instrument: \whpfperc, wave: 1500).play`
+(instrument: \whpfperc, wave: 1500).play
 
-`(instrument: \wchpad).play`
+(instrument: \wchpad).play
 
-`(instrument: \wvperc).play`
+(instrument: \wvperc).play
 
-`(instrument: \wv3perc).play`
+(instrument: \wv3perc).play
+```
