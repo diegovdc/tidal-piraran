@@ -8,7 +8,7 @@ Add this snippets at the end of the `Boot.hs` file provided in this repo changin
 
 ```
 :script /path/to/this/Repo/piraran/tidal-piraran/tunings/diatonic-cps.hs
-:script /path/to/this/Repo/piraran/tidal-piraran/tunings/main.hs
+:script /path/to/this/Repo/piraran/tidal-piraran/tunings/main.tidal
 :script /path/to/this/Repo/piraran/tidal-piraran/PiraranSuperCollider/funcas.tidal
 ```
 
