@@ -76,7 +76,7 @@ SynthDef(\wpad, {
 }).add;
 
 // first test, change the waveshape with the param wave!
-/*(instrument: \waveShape, wave: 500).play;*/
+/*(instrument: \wpad, wave: 500).play;*/
 
 // all waveshapes with a LPF and a simple 4 point envelope
 SynthDef(\wlpfpad, {
@@ -91,7 +91,7 @@ SynthDef(\wlpfpad, {
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 
-/*(instrument: \waveShapeLPF, wave: 1500).play;*/
+/*(instrument: \wlpfpad, wave: 1500).play;*/
 
 // all waveshapes with a HPF and a simple 4 point envelope
 SynthDef(\whpfpad, {
@@ -106,7 +106,7 @@ SynthDef(\whpfpad, {
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 
-/*(instrument: \waveShapeHPF, wave: 1500).play;*/
+/*(instrument: \whpfpad, wave: 1500).play;*/
 
 // waveshapes with chorus
 SynthDef(\wchpad, {
@@ -118,7 +118,7 @@ SynthDef(\wchpad, {
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 
-/*(instrument: \waveShapeC, wave: 3500).play;*/
+/*(instrument: \wchpad, wave: 3500).play;*/
 
 // interpolation between waveshapes
 SynthDef(\wvpad, {
@@ -132,7 +132,7 @@ SynthDef(\wvpad, {
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 
-/*(instrument: \waveShapeV).play;*/
+/*(instrument: \wvpad).play;*/
 
 // interpolation between waveshapes, 3 freqs at the same time
 SynthDef(\wv3pad, {
@@ -146,7 +146,7 @@ SynthDef(\wv3pad, {
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 
-/*(instrument: \waveShapeV3).play;*/
+/*(instrument: \wv3pad).play;*/
 
 // Percusive Envelope Synths, los mismos synths pero con envolvente percusivo, los argumentos \att y \rel controlan el attaque y el release respectivamente independientemente del tiempo de onset de cada evento
 
@@ -160,7 +160,7 @@ SynthDef(\wperc, {
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 
-/*(instrument: \waveShapePerc).play;*/
+/*(instrument: \wperc).play;*/
 
 // all waveshapes with a LPF and a simple 4 point envelope
 SynthDef(\wlpfperc, {
@@ -175,7 +175,7 @@ SynthDef(\wlpfperc, {
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 
-/*(instrument: \waveShapeLPFPerc).play;*/
+/*(instrument: \wlpfperc).play;*/
 
 // all waveshapes with a HPF and a simple 4 point envelope
 SynthDef(\whpfperc, {
@@ -190,7 +190,7 @@ SynthDef(\whpfperc, {
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 
-/*(instrument: \waveShapeHPFPerc).play;*/
+/*(instrument: \whpfperc).play;*/
 
 // waveshapes with chorus
 SynthDef(\wchperc, {
@@ -202,7 +202,7 @@ SynthDef(\wchperc, {
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 
-/*(instrument: \waveShapeCPerc).play;*/
+/*(instrument: \wchperc).play;*/
 
 // interpolation between waveshapes
 SynthDef(\wvpPerc, {
@@ -216,7 +216,7 @@ SynthDef(\wvpPerc, {
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 
-/*(instrument: \waveShapeVPerc).play;*/
+/*(instrument: \wvpPerc).play;*/
 
 // interpolation between waveshapes, 3 freqs at the same time
 SynthDef(\wv3perc, {
@@ -230,7 +230,7 @@ SynthDef(\wv3perc, {
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 
-/*(instrument: \waveShapeV3Perc).play;*/
+/*(instrument: \wv3perc).play;*/
 
 // ----------------------------------------; // FX and Filters
 
