@@ -1,0 +1,38 @@
+import qualified Data.Map as Map
+import Sound.Tidal.Scales
+import Data.List
+import Data.Maybe
+:{
+aliases = [("2oo4x7i15t1i3i9i19","diat0v1")
+          , ("2oo4x7i21t1i3i9i19","diat0v2")
+          , ("2oo4x15i21t1i3i9i19" ,"diat0v3")
+          , ("2oo4x7i21t1i3i9i15" ,"diat1v1")
+          , ("2oo4x7i19t1i3i9i15" ,"diat1v2")
+          , ("2oo4x19i21t1i3i9i15" ,"diat1v3")
+          , ("2oo4x1i15t3i7i19i21" ,"diat2v1")
+          , ("2oo4x1i9t3i7i19i21" ,"diat2v2")
+          , ("2oo4x9i15t3i7i19i21" ,"diat2v3")
+          , ("2oo4x1i15t7i9i19i21" ,"diat3v1")
+          , ("2oo4x1i3t7i9i19i21" ,"diat3v2")
+          , ("2oo4x3i15t7i9i19i21" ,"diat3v3")
+          , ("2oo4x3i15t1i7i9i21" ,"diat4v1")
+          , ("2oo4x15i19t1i7i9i21" ,"diat4v2")
+          , ("2oo4x3i19t1i7i9i21" ,"diat4v3")
+          , ("2oo4x7i15t1i3i19i21" ,"diat5v1")
+          , ("2oo4x7i9t1i3i19i21" ,"diat5v2")
+          , ("2oo4x9i15t1i3i19i21" ,"diat5v3")
+          , ("2oo4x15i21t1i3i7i9" ,"diat6v1")
+          , ("2oo4x15i19t1i3i7i9" ,"diat6v2")
+          , ("2oo4x19i21t1i3i7i9" ,"diat6v3")]
+:}
+addAliases' k alias scales = Map.insert alias (fromMaybe [2.005319830023106,2.941349974038373,4.674028886060471] (Map.lookup k scales)) scales
+
+addAliases aliases scales = Map.toList $ Map.foldrWithKey addAliases' (Map.fromList scales) (Map.fromList aliases)
+
+piraScales' = addAliases aliases piraScales
+
+printScaleList scales = mapM_ print $  reverse $ sort $ map fst scales
+
+printAliasesList = mapM_ print $  reverse $ map snd aliases
+
+piraScale = getScale piraScales' 
