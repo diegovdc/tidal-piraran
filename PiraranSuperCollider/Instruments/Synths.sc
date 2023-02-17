@@ -62,10 +62,11 @@ var val= ~range.(100,200);
 // all waveshapes
 SynthDef(\w, {
 	| wave=0, freq=300, amp=1,
-	dec=0.25, sustain=1, pan=0.5, out=0 |
+	dec=0.25, att=0.01, rel=0.99, sustain=1, pan=0.5, out=0 |
 	var sig, env;
 	sig= Osc.ar(wave, freq, 0, amp);
-	env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
+	// env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
+	env = EnvGen.ar(Env.perc(att,rel),timeScale:sustain,doneAction:2);
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 );
@@ -75,13 +76,14 @@ SynthDef(\w, {
 // all waveshapes with a LPF and a simple 4 point envelope
 SynthDef(\wlpf, {
 	| wave=0, freq=300, rq=0.1, amp=0.5,
-	dec=0.25, sustain=1, pan=0.5, out=0,
+	dec=0.25, sustain=1, att=0.001, rel= 0.99, pan=0.5, out=0,
 	p1=5,p2=8, p3=13, p4=5, t1=0.1, t2=0.1, t3=0.1 |
 	var sig, filter, env;
 	filter= EnvGen.kr(Env([p1,p2,p3,p4],[t1,t2,t3]));
 	sig= Osc.ar(wave, freq, 0, 1);
 	sig= RLPF.ar(sig,freq*filter, rq, amp);
-	env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
+	//env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
+	env = EnvGen.ar(Env.perc(att,rel),timeScale:sustain,doneAction:2);
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 );
@@ -92,13 +94,14 @@ SynthDef(\wlpf, {
 // all waveshapes with a HPF and a simple 4 point envelope
 SynthDef(\whpf, {
 	| wave=0, freq=300, rq=0.1, amp=1,
-	dec=0.25, sustain=1, pan=0.5, out=0,
+	dec=0.25, sustain=1, att=0.001, rel=0.99, pan=0.5, out=0,
 	p1=4,p2=6, p3=2, p4=3, t1=0.2, t2=0.2, t3=0.2 |
 	var sig, filter, env;
 	filter= EnvGen.kr(Env([p1,p2,p3,p4],[t1,t2,t3]));
 	sig= Osc.ar(wave, freq, 0, 1);
 	sig= RHPF.ar(sig,freq*filter, 0.1, amp);
-	env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
+	// env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
+	env = EnvGen.ar(Env.perc(att,rel),timeScale:sustain,doneAction:2);
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 );
@@ -108,10 +111,11 @@ SynthDef(\whpf, {
 // waveshapes with chorus
 SynthDef(\wch, {
 	| wave=1, freq=300, beats=0.5, amp=1,
-	dec=0.25, sustain=1, pan=0.5, out=0 |
+	dec=0.25, sustain=1, att=0.001, rel=0.99, pan=0.5, out=0 |
 	var sig, env;
 	sig= COsc.ar(wave, freq, beats, amp);
-	env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
+	// env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
+	env = EnvGen.ar(Env.perc(att,rel),timeScale:sustain,doneAction:2);
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 );
@@ -121,11 +125,12 @@ SynthDef(\wch, {
 // interpolation between waveshapes
 SynthDef(\wv, {
 	| bufInter=0.1, phase=1, min=40, max= 50, freq=300, amp=1,
-	dec=0.25, sustain=1, pan=0.5, out=0 |
+	dec=0.25, sustain=1, att=0.001, rel=0.99, pan=0.5, out=0 |
 	var osc, sig, env;
 	osc= SinOsc.ar(bufInter, phase).range(min,max);
 	sig= VOsc.ar(osc, freq, 0, amp);
-	env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
+	// env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
+	env = EnvGen.ar(Env.perc(att,rel),timeScale:sustain,doneAction:2);
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 );
@@ -134,11 +139,12 @@ SynthDef(\wv, {
 // interpolation between waveshapes, 3 freqs at the same time
 SynthDef(\wv3, {
 	| bufInter=0.1, phase=1, min=40, max= 50, freq=300, offset=#[0,0.033,-0.05], amp=1,
-	dec=0.25, sustain=1, pan=0.5, out=0 |
+	dec=0.25, sustain=1, att=0.01, rel=0.99, pan=0.5, out=0 |
 	var osc, pitch, sig, env;
 	osc= SinOsc.ar(bufInter, phase).range(min,max);
 	sig= VOsc3.ar(osc, freq+offset[0], freq+offset[1], freq+offset[2], amp);
-	env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
+	// env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
+	env = EnvGen.ar(Env.perc(att,rel),timeScale:sustain,doneAction:2);
 	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
 }).add;
 );
