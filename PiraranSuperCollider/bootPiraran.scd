@@ -1,5 +1,6 @@
 (
 var path = thisProcess.nowExecutingPath.dirname.postln;
+var environment = path ++ "/env.scd";
 var wavesynths = path ++ "/Instruments/Synths.sc";
 s.options.numBuffers = 1024 * 16;
 Server.default.options.memSize= 512000*20;
@@ -24,11 +25,17 @@ s.waitForBoot({
 	~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
     ~dirt.loadSoundFiles;   // load samples (path containing a wildcard can be passed in)
     s.sync; // wait for samples to be read
-    ~dirt.start(57120, [0, 0]);   // start listening on port 57120, create two orbits, each sending audio to channel 0. You can direct sounds to the orbits from tidal e.g. by: `# orbit "0 1 1"
+    ~dirt.start(57120, [0, 0, 0, 0]);   // start listening on port 57120, create two orbits, each sending audio to channel 0. You can direct sounds to the orbits from tidal e.g. by: `# orbit "0 1 1"
+	MIDIClient.init;
+	~midiOut = MIDIOut.newByName("Midi Through", "Midi Through Port-0"); // aqui van las variables globales de midiDeviceName0, midiPortName0
+	~dirt.soundLibrary.addMIDI(\bajo, ~midiOut);
+	~dirt.soundLibrary.addMIDI(\bombo, ~midiOut);
+
 
 });
 
 );
+
 
 
 
