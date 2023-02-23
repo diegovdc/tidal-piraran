@@ -2,6 +2,7 @@
 var path = thisProcess.nowExecutingPath.dirname.postln;
 var environment = path ++ "/env.scd";
 var wavesynths = path ++ "/Instruments/Synths.sc";
+var samples = path ++ "/Instruments/tarola";
 s.options.numBuffers = 1024 * 16;
 Server.default.options.memSize= 512000*20;
 Server.default.options.maxNodes=128*1024;
@@ -21,6 +22,7 @@ s.boot;
 
 s.waitForBoot({
 	wavesynths.load; // load the synths
+	~tarola = SoundFile.collectIntoBuffers(samples++"/*");
 
 	~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
     ~dirt.loadSoundFiles;   // load samples (path containing a wildcard can be passed in)
