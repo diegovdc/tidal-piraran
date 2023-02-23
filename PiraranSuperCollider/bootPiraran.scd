@@ -2,7 +2,6 @@
 var path = thisProcess.nowExecutingPath.dirname.postln;
 var environment = path ++ "/env.scd";
 var wavesynths = path ++ "/Instruments/Synths.sc";
-var samples = path ++ "/Instruments/tarola";
 s.options.numBuffers = 1024 * 16;
 Server.default.options.memSize= 512000*20;
 Server.default.options.maxNodes=128*1024;
@@ -22,10 +21,9 @@ s.boot;
 
 s.waitForBoot({
 	wavesynths.load; // load the synths
-	~tarola = SoundFile.collectIntoBuffers(samples++"/*");
-
 	~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
     ~dirt.loadSoundFiles;   // load samples (path containing a wildcard can be passed in)
+	~dirt.loadSoundFiles(path ++ "/Instruments/tarola/*");
     s.sync; // wait for samples to be read
     ~dirt.start(57120, [0, 0, 0, 0]);   // start listening on port 57120, create two orbits, each sending audio to channel 0. You can direct sounds to the orbits from tidal e.g. by: `# orbit "0 1 1"
 	// MIDIClient.init;
@@ -34,7 +32,7 @@ s.waitForBoot({
 		~dirt.soundLibrary.addMIDI(\bajo, ~midiOut);
 		~dirt.soundLibrary.addMIDI(\bombo, ~midiOut);
 	},
-	{"Could not connect to midi".postln;});
+	{"Could not connect to midi".warn;});
 });
 
 );
