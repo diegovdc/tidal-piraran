@@ -20,6 +20,7 @@ Server.default.options.sampleRate = 48000;
 s.boot;
 
 s.waitForBoot({
+	environment.load
 	wavesynths.load; // load the synths
 	~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
 	// leave this at 2 (stereo channel per orbit)
