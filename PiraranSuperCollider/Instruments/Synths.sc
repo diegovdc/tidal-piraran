@@ -67,7 +67,7 @@ SynthDef(\w, {
 	sig= Osc.ar(wave, freq, 0, amp);
 	// env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
 	env = EnvGen.ar(Env.perc(att,rel),timeScale:sustain,doneAction:2);
-	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
+	OffsetOut.ar(out, DirtPan.ar(sig*0.125, ~dirt.numChannels, pan, env))
 }).add;
 );
 // first test, change the waveshape with the param wave!
@@ -84,7 +84,7 @@ SynthDef(\wlpf, {
 	sig= RLPF.ar(sig,freq*filter, rq, amp);
 	//env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
 	env = EnvGen.ar(Env.perc(att,rel),timeScale:sustain,doneAction:2);
-	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
+	OffsetOut.ar(out, DirtPan.ar(sig*0.125, ~dirt.numChannels, pan, env))
 }).add;
 );
 
@@ -102,7 +102,7 @@ SynthDef(\whpf, {
 	sig= RHPF.ar(sig,freq*filter, 0.1, amp);
 	// env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
 	env = EnvGen.ar(Env.perc(att,rel),timeScale:sustain,doneAction:2);
-	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
+	OffsetOut.ar(out, DirtPan.ar(sig*0.125, ~dirt.numChannels, pan, env))
 }).add;
 );
 /*(instrument: \whpf, wave: 1500).play;*/
@@ -116,7 +116,7 @@ SynthDef(\wch, {
 	sig= COsc.ar(wave, freq, beats, amp);
 	// env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
 	env = EnvGen.ar(Env.perc(att,rel),timeScale:sustain,doneAction:2);
-	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
+	OffsetOut.ar(out, DirtPan.ar(sig*0.125, ~dirt.numChannels, pan, env))
 }).add;
 );
 /*(instrument: \wch, wave: 3500).play;*/
@@ -124,31 +124,32 @@ SynthDef(\wch, {
 (
 // interpolation between waveshapes
 SynthDef(\wv, {
-	| bufInter=0.1, phase=1, min=40, max= 50, freq=300, amp=1,
+	| bufInter=1, phase=1, wmin=40, wmax= 50, freq=300, amp=1,
 	dec=0.25, sustain=1, att=0.001, rel=0.99, pan=0.5, out=0 |
 	var osc, sig, env;
-	osc= SinOsc.ar(bufInter, phase).range(min,max);
-	sig= VOsc.ar(osc, freq, 0, amp);
+	// osc= SinOsc.ar(bufInter, phase).range(min,max);
+	sig= VOsc.ar(Line.kr(wmin,wmax,sustain), freq, 0, amp);
 	// env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
 	env = EnvGen.ar(Env.perc(att,rel),timeScale:sustain,doneAction:2);
-	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
+	OffsetOut.ar(out, DirtPan.ar(sig*0.125, ~dirt.numChannels, pan, env))
 }).add;
 );
 /*(instrument: \wv).play;*/
 (
 // interpolation between waveshapes, 3 freqs at the same time
 SynthDef(\wv3, {
-	| bufInter=0.1, phase=1, min=40, max= 50, freq=300, offset=#[0,0.033,-0.05], amp=1,
+	| bufInter=1, phase=1, wmin=40, wmax= 50, freq=300, offset=#[0,0.033,-0.05], amp=1,
 	dec=0.25, sustain=1, att=0.01, rel=0.99, pan=0.5, out=0 |
 	var osc, pitch, sig, env;
-	osc= SinOsc.ar(bufInter, phase).range(min,max);
-	sig= VOsc3.ar(osc, freq+offset[0], freq+offset[1], freq+offset[2], amp);
+//	osc= SinOsc.ar(bufInter, phase).range(min,max);
+	sig= VOsc3.ar(Line.kr(wmin,wmax,sustain*bufInter), freq+offset[0], freq+offset[1], freq+offset[2], amp);
 	// env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
 	env = EnvGen.ar(Env.perc(att,rel),timeScale:sustain,doneAction:2);
-	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, env))
+	OffsetOut.ar(out, DirtPan.ar(sig*0.125, ~dirt.numChannels, pan, env))
 }).add;
 );
 /*(instrument: \wv3).play;*/
+
 
 
 // ///
