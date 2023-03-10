@@ -1,7 +1,7 @@
 wave = pI "wave"
 wmin = pF "wmin"
 wmax = pF "wmax"
-bufInter = pF "bufInter"
+bufInter = pF "inter"
 p1 = pF "p1"
 p2 = pF "p2"
 p3 = pF "p3"
@@ -10,11 +10,13 @@ t1 = pF "t1"
 t2 = pF "t2"
 t3 = pF "t3"
 
+
+
 -- fit:: Pattern Double -> Pattern ValueMap
 fit p = sustain p # rel (p |* 0.999) # att (p |* 0.001)
 
 -- fitWaveV3:: Pattern Double -> Pattern ValueMap
-fitWaveV3 p = fit p # wInter p
+fitWaveV3 p = fit p # bufInter p
 
 -- fitWaveLPF:: Pattern Double -> Pattern Double -> Pattern Double -> Pattern Double -> Pattern Double -> Pattern ValueMap
 fitWaveLPF p1' p2' p3' p4' p = fit p # p1 p1' # p2 p2' # p3 p3' # p4 p4' # t1 (p |* 0.05) # t2 (p |* 0.45) # t3 (p |* 0.5)

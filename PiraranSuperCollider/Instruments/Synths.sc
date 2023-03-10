@@ -128,7 +128,7 @@ SynthDef(\wv, {
 	dec=0.25, sustain=1, att=0.001, rel=0.99, pan=0.5, out=0 |
 	var osc, sig, env;
 	// osc= SinOsc.ar(bufInter, phase).range(min,max);
-	sig= VOsc.ar(Line.kr(wmin,wmax,sustain), freq, 0, amp);
+	sig= VOsc.ar(Line.kr(wmin,wmax,sustain*bufInter), freq, 0, amp);
 	// env = EnvGen.ar(Env.pairs([[0,0],[0.05,1],[0.2,1-dec],[0.95,1-dec],[1,0]], -3), timeScale:sustain, doneAction:2);
 	env = EnvGen.ar(Env.perc(att,rel),timeScale:sustain,doneAction:2);
 	OffsetOut.ar(out, DirtPan.ar(sig*0.125, ~dirt.numChannels, pan, env))
