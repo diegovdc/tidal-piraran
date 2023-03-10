@@ -28,7 +28,7 @@ s.waitForBoot({
 	~dirt.loadSoundFiles(path ++ "/Instruments/tarola/");
     s.sync; // wait for samples to be read
     ~dirt.start(57120, [0, 2, 4, 6, 8, 10, 12, 14]);   // start listening on port 57120, create two orbits, each sending audio to channel 0. You can direct sounds to the orbits from tidal e.g. by: `# orbit "0 1 1"
-	// MIDIClient.init;
+	MIDIClient.init;
 	try({
 		~midiOut = MIDIOut.newByName(~midiDeviceName0, ~midiPortName0); // aqui van las variables globales de midiDeviceName0, midiPortName0
 		~dirt.soundLibrary.addMIDI(\bajo, ~midiOut);
