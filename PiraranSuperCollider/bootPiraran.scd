@@ -34,6 +34,7 @@ s.waitForBoot({
 		~midiOut = MIDIOut.newByName(~midiDeviceName0, ~midiPortName0); // aqui van las variables globales de midiDeviceName0, midiPortName0
 		~dirt.soundLibrary.addMIDI(\bajo, ~midiOut);
 		~dirt.soundLibrary.addMIDI(\bombo, ~midiOut);
+        ~midiOut.latency = 0;
 	},
 	{"Could not connect to midi".warn;});
 });
