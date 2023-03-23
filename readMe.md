@@ -53,3 +53,9 @@ Test the Synths in SuperCollider:
 
 (instrument: \wv3).play
 ```
+
+## Órbitas
+
+f1 - f3 melódicos
+f4 - f7 percas
+f8 - bombo
