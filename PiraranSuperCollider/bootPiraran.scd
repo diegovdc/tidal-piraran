@@ -2,6 +2,7 @@
 var path = thisProcess.nowExecutingPath.dirname.postln;
 var environment = path ++ "/env.scd";
 var wavesynths = path ++ "/Instruments/Synths.sc";
+var convolucion = path ++ "/convolucion.scd";
 s.options.numBuffers = 1024 * 16;
 Server.default.options.memSize= 512000*20;
 Server.default.options.maxNodes=128*1024;
@@ -22,6 +23,7 @@ s.boot;
 s.waitForBoot({
 	environment.load;
 	wavesynths.load; // load the synths
+	convolucion.load;
 	~dirt = SuperDirt(2, s); // two output channels, increase if you want to pan across more channels
 	// leave this at 2 (stereo channel per orbit)
 
@@ -39,6 +41,5 @@ s.waitForBoot({
 	{"Could not connect to midi".warn;});
 });
 
-);
-
+)
 
