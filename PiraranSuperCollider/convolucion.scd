@@ -1,8 +1,10 @@
 var path = thisProcess.nowExecutingPath.dirname;
 
-var protestas = SoundFile.collectIntoBuffers(path++"/protestas"++"/*");
+var protestas = SoundFile.collectIntoBuffers(path++"/Instruments/agua"++"/*");
 
 var numFrames= protestas.collect{|item|  item.numFrames};
+
+numFrames.postln;
 
 SynthDef(\samplePlayer, {
 	| buf= 0, rate=1, imp=0, startPos=0, loop=0, amp=0.25,

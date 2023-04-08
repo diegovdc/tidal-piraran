@@ -10,7 +10,7 @@ Pdef(\voices).play;
 ~protesta.set(\ampTidal, 1) // volume from clean signal coming from tidal
 ~protesta.set(\ampProtesta, 1) // volume of clean signal from pattern playing protest
 ~protesta.set(\ampKl, 3) // volume input to kernel (amount of tidal to convo)
-~protesta.set(\ampIn, 1) // volume input to input (amount of protest to convo)
+~protesta.set(\ampIn, 2) // volume input to input (amount of protest to convo)
 ~protesta.set(\amp, 1) // general volume
 
 
