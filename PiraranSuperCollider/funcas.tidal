@@ -16,7 +16,7 @@ f4 x = d4 $ (# orbit 3) $ x
 f5 x = d5 $ (# orbit 4) $ x
 f6 x = d6 $ (# orbit 5) $ x
 f7 x = d7 $ (# orbit 6) $ x
-f8 x = d8 $ (# orbit 5) $ x
+f8 x = d8 $ (# orbit 7) $ x
 bombo x = d8 $ (# orbit 0) $ (# midinote 36) $ (# midichan 1) $ x
 
 -- fit:: Pattern Double -> Pattern ValueMap
